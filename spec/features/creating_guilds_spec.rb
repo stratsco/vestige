@@ -1,11 +1,13 @@
 require "rails_helper"
 
 RSpec.feature "Users can create new guilds" do
-  scenario "with valid attributes" do
+  before do
     visit "/"
 
     click_link "Create New Guild"
+  end
 
+  scenario "with valid attributes" do
     fill_in "Game", with: "The Elder Scrolls Online"
     fill_in "Name", with: "Strategy and Company"
     fill_in "Server", with: "North American"
@@ -20,6 +22,13 @@ RSpec.feature "Users can create new guilds" do
     title = "Strategy and Company - Guilds - Vestige"
     expect(page).to have_title title
 
+  end
 
+  scenario "with invalid attributes" do
+    click_button "Create Guild"
+
+    expect(page).to have_content "Guild has not been created."
+    expect(page).to have_content "Game can't be blank"
+    expect(page).to have_content "Name can't be blank"
   end
 end

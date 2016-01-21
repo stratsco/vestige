@@ -14,7 +14,8 @@ class GuildsController < ApplicationController
       flash[:notice] = "Guild has been created."
       redirect_to @guild
     else
-      # nothing, yet
+      flash.now[:alert] = "Guild has not been created."
+      render "new"
     end
   end
 
