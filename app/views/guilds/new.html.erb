@@ -1,0 +1,24 @@
+<h1>New Guild</h1>
+<%= form_for(@guild) do |f| %>
+  <p>
+    <%= f.label :game %><br>
+    <%= f.text_field :game %>
+  </p>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :server %><br>
+    <%= f.text_field :server %>
+  </p>
+
+  <p>
+    <%= f.label :affiliation %><br>
+    <%= f.text_field :affiliation %>
+  </p>
+
+  <%= f.submit %>
+<% end %>
