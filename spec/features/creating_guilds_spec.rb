@@ -13,5 +13,13 @@ RSpec.feature "Users can create new guilds" do
     click_button "Create Guild"
 
     expect(page).to have_content "Guild has been created."
+    
+    guild = Guild.find_by(name: "Strategy and Company")
+    expect(page.current_url).to eq guild_url(guild)
+
+    title = "Strategy and Company - Guilds - Vestige"
+    expect(page).to have_title title
+
+
   end
 end
