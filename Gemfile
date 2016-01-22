@@ -20,11 +20,11 @@ end
 
 group :development do
   gem 'web-console', '~> 2.0'
-  gem 'factory_girl_rails'
   gem 'spring'
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 3.0'
   gem 'capybara', '~> 2.4'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.0'
 end

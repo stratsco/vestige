@@ -1,6 +1,7 @@
 class GuildsController < ApplicationController
   
   def index
+    @guild = Guild.all
   end
 
   def new
