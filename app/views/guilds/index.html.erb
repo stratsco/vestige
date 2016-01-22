@@ -4,7 +4,11 @@
 
 <div id="guilds">
   <% @guild.each do |guild| %>
-    <h2><%= link_to guild.name, guild %></h2>
-    <p><%= guild.game %></p>
+    <ol>
+      <li>
+        <h3><%= guild.game %></h3>
+        <h2><%= link_to guild.name, guild %></h2>
+      </li>
+    </ol>
   <% end %>
 </div>
