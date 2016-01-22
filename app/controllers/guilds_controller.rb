@@ -1,4 +1,5 @@
 class GuildsController < ApplicationController
+  before_action :set_guild, only: [:show, :edit, :update, :destroy]
   
   def index
     @guild = Guild.all
@@ -21,16 +22,12 @@ class GuildsController < ApplicationController
   end
 
   def show
-    @guild = Guild.find(params[:id])
   end
 
   def edit
-    @guild = Guild.find(params[:id])
   end
 
   def update
-    @guild = Guild.find(params[:id])
-    
     if @guild.update(guild_params)
       flash[:notice] = "Guild has been updated."
       redirect_to @guild
@@ -41,7 +38,6 @@ class GuildsController < ApplicationController
   end
 
   def destroy
-    @guild = Guild.find(params[:id])
     @guild.destroy
 
     flash[:notice] = "Guild has been deleted."
@@ -49,6 +45,13 @@ class GuildsController < ApplicationController
   end
 
   private
+
+  def set_guild
+    @guild = Guild.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The guild you were looking for could not be found."
+    redirect_to guilds_path
+  end
 
   def guild_params
     params.require(:guild).permit(:game, :name, :server, :affiliation)
