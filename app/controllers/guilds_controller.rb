@@ -40,6 +40,14 @@ class GuildsController < ApplicationController
     end
   end
 
+  def destroy
+    @guild = Guild.find(params[:id])
+    @guild.destroy
+
+    flash[:notice] = "Guild has been deleted."
+    redirect_to guilds_path
+  end
+
   private
 
   def guild_params
