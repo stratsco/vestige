@@ -24,6 +24,22 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
   end
 
+  def edit
+    @guild = Guild.find(params[:id])
+  end
+
+  def update
+    @guild = Guild.find(params[:id])
+    
+    if @guild.update(guild_params)
+      flash[:notice] = "Guild has been updated."
+      redirect_to @guild
+    else
+      flash.now[:alert] = "Guild has not been updated."
+      render "edit"
+    end
+  end
+
   private
 
   def guild_params

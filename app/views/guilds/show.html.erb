@@ -1,5 +1,7 @@
 <% title(@guild.name, "Guilds") %>
-<h1><%= @guild.game %></h1>
-<h2><%= @guild.name %></h2>
+
+<h1><%= @guild.name %></h1>
+<h2><%= @guild.game %></h2>
 <p><%= @guild.server %></p>
 <p><%= @guild.affiliation %></p>
+<%= link_to "Edit Guild", edit_guild_path(@guild) %>
