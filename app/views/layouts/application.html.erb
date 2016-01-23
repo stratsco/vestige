@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vestige</title>
+  <title>
+    <% if content_for?(:title) %>
+      <%= yield(:title) %>
+    <% else %>
+      Vestige
+    <% end %>
+    </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% flash.each do |key, message| %>
+    <div><%= message %></div>
+  <% end %>
 
 <%= yield %>
 
