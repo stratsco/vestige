@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Users can delete guilds" do
+  before do
+    login_as(FactoryGirl.create(:user, :admin))
+  end
   scenario "successfully" do
     FactoryGirl.create(:guild, game: "The Elder Scrolls Online", 
                         name: "Strategy and Company")
