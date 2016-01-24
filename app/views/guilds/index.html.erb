@@ -1,6 +1,8 @@
 <h1>Guilds</h1>
 
-<%= link_to "Create Guild", new_admin_guild_path %>
+<% admins_only do %>
+  <%= link_to "Create Guild", new_admin_guild_path %>
+<% end %>
 
 <div id="guilds">
   <% @guild.each do |guild| %>
