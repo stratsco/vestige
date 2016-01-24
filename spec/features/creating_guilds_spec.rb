@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Users can create new guilds" do
   before do
+    login_as(FactoryGirl.create(:user, :admin))
     visit "/"
 
-    click_link "Create New Guild"
+    click_link "Create Guild"
   end
 
   scenario "with valid attributes" do
