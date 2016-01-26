@@ -5,22 +5,6 @@ class GuildsController < ApplicationController
     @guild = Guild.all
   end
 
-  def new
-    @guild = Guild.new
-  end
-
-  def create
-    @guild = Guild.new(guild_params)
-
-    if @guild.save
-      flash[:notice] = "Guild has been created."
-      redirect_to @guild
-    else
-      flash.now[:alert] = "Guild has not been created."
-      render "new"
-    end
-  end
-
   def show
   end
 
@@ -35,13 +19,6 @@ class GuildsController < ApplicationController
       flash.now[:alert] = "Guild has not been updated."
       render "edit"
     end
-  end
-
-  def destroy
-    @guild.destroy
-
-    flash[:notice] = "Guild has been deleted."
-    redirect_to guilds_path
   end
 
   private

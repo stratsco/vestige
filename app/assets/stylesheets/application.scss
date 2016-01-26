@@ -1,3 +1,21 @@
 @import "bourbon";
 @import "base/base";
 @import "neat";
+
+.main {
+  @include outer-container(1920px);
+  h1 {
+    font-size: 2em;
+  }
+}
+
+#guilds {
+  @include span-columns(12);
+  margin: .75em 0 0 0;
+  h2 {
+    font-size: 1.5em;
+  }
+  li {
+    padding: 20px;
+  }
+}

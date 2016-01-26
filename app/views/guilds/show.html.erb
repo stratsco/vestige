@@ -5,8 +5,10 @@
 <p><%= @guild.server %></p>
 <p><%= @guild.affiliation %></p>
 <%= link_to "Edit Guild", edit_guild_path(@guild) %>
+<% admins_only do %>
 <%= link_to "Delete Guild",
-  guild_path(@guild),
+  admin_guild_path(@guild),
   method: :delete,
   data: { confirm: "Are you sure you want to delete this guild?" }
 %>
+<% end %>
