@@ -10,15 +10,13 @@ RSpec.feature "User can only see the appropriate links" do
       visit "/"
       expect(page).not_to have_link "Create Guild"
     end
-
-    scenario "cannot see the Delete Guild link" do
-      visit guild_path(guild)
-      expect(page).not_to have_link "Delete Guild"
-    end
   end
 
-  context "regular users" do
-    before { login_as(user) }
+  context "non-admin users (guild members)" do
+    before do
+      login_as(user)
+      assign_role!(user, :member, guild)
+    end
 
     scenario "cannot see the Create Guild link" do
       visit "/"
@@ -28,6 +26,11 @@ RSpec.feature "User can only see the appropriate links" do
     scenario "cannot see the Delete Guild link" do
       visit guild_path(guild)
       expect(page).not_to have_link "Delete Guild"
+    end
+
+    scenario "cannot see the Edit Guild link" do
+      visit guild_path(guild)
+      expect(page).not_to have_link "Edit Guild"
     end
   end
 
@@ -42,6 +45,11 @@ RSpec.feature "User can only see the appropriate links" do
     scenario "can see the Delete Guild link" do
       visit guild_path(guild)
       expect(page).to have_link "Delete Guild"
+    end
+
+    scenario "can see the Edit Guild link" do
+      visit guild_path(guild)
+      expect(page).to have_link "Edit Guild"
     end
   end
 end

@@ -9,6 +9,27 @@
   }
 }
 
+.navbar {
+  border-bottom: 1px solid $base-border-color;
+  margin: em(30) 0;
+
+  ul {
+    display: inline-block;
+    margin-bottom: em(10);
+  }
+}
+
+.logo {
+  font-size: 1.4em;
+  font-weight: 700;
+  letterspacing: 4px;
+  text-transform: uppercase;
+}
+
+li {
+  margin: .5em 0;
+}
+
 #guilds {
   @include span-columns(12);
   margin: .75em 0 0 0;

@@ -1,9 +1,13 @@
 require "rails_helper"
 
-RSpec.feature "Users can edit existing guilds" do
+RSpec.feature "Guild masters can edit existing guilds" do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:guild) { FactoryGirl.create(:guild, game: "The Elder Scrolls Online", 
+                                   name: "Strategy and Company") }
+  
   before do
-    FactoryGirl.create(:guild, game: "The Elder Scrolls Online", 
-                       name: "Strategy and Company")
+    login_as(user)
+    assign_role!(user, :guild_master, guild)
 
     visit "/"
     click_link "Strategy and Company"

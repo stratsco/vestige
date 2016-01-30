@@ -6,12 +6,15 @@ class GuildsController < ApplicationController
   end
 
   def show
+    authorize @guild, :show?
   end
 
   def edit
+    authorize @guild, :update?
   end
 
   def update
+    authorize @guild, :update?
     if @guild.update(guild_params)
       flash[:notice] = "Guild has been updated."
       redirect_to @guild

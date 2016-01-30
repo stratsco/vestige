@@ -18,7 +18,7 @@
         <div class="navbar">
           <div class="navbar-left">
             <ul>
-              <li><%= link_to "Vestige", root_path %></li>
+              <li><%= link_to "Vestige", root_path, :class => 'logo' %></li>
               <% admins_only do %>
                 <li><%= link_to "Admin", admin_root_path %></li>
               <% end %>

@@ -12,7 +12,23 @@
   <%= f.check_box(:admin) %>
   <%= f.label(:admin, "Is an admin?") %>
 
+<h2>Roles</h2>
+
+<table>
+  <% guilds.each do |guild| %>
+    <tr>
+      <th><%= label_tag dom_id(guild), guild.name %></th>
+      <td>
+        <%= select_tag dom_id(guild), options_for_select(roles,
+        user.role_on(guild)), name: "roles[#{guild.id}]",
+        include_blank: true %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
   <%= f.submit %>
 <% end %>
+
 
 

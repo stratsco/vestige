@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
+  before_action :set_guilds, only: [:new, :create, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :archive]
 
   def index
@@ -14,7 +15,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    build_roles_for(@user)
     if @user.save
       flash[:notice] = "User has been created."
       redirect_to admin_users_path
@@ -31,12 +32,18 @@ class Admin::UsersController < Admin::ApplicationController
     if params[:user][:password].blank?
       params[:user].delete(:password)
     end
-    if @user.update(user_params)
-      flash[:notice] = "User has been updated."
-      redirect_to admin_users_path
-    else
-      flash.now[:alert] = "User has not been updated."
-      render "edit"
+
+    User.transaction do
+      @user.roles.clear
+      build_roles_for(@user)
+
+      if @user.update(user_params)
+        flash[:notice] = "User has been updated."
+        redirect_to admin_users_path
+      else
+        flash.now[:alert] = "User has not been updated."
+        render "edit"
+      end
     end
   end
 
@@ -53,11 +60,24 @@ class Admin::UsersController < Admin::ApplicationController
 
   private
 
+  def set_guilds
+    @guilds = Guild.order(:name)
+  end
+
   def user_params
     params.require(:user).permit(:email, :password, :admin)
   end
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def build_roles_for(user)
+    role_data = params.fetch(:roles, [])
+    role_data.each do |guild_id, role_name|
+      if role_name.present?
+        @user.roles.build(guild_id: guild_id, role: role_name)
+      end
+    end
   end
 end

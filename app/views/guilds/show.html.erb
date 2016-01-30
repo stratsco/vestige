@@ -4,11 +4,14 @@
 <h2><%= @guild.game %></h2>
 <p><%= @guild.server %></p>
 <p><%= @guild.affiliation %></p>
-<%= link_to "Edit Guild", edit_guild_path(@guild) %>
+<ul>
+  <% if policy(@guild).update? %>
+    <li><%= link_to "Edit Guild", edit_guild_path(@guild) %></li>
+  <% end %>
+</ul>
+<ul>
 <% admins_only do %>
-<%= link_to "Delete Guild",
-  admin_guild_path(@guild),
-  method: :delete,
-  data: { confirm: "Are you sure you want to delete this guild?" }
-%>
+  <li><%= link_to "Delete Guild",admin_guild_path(@guild),method: :delete,
+    data: { confirm: "Are you sure you want to delete this guild?" }%></li>
 <% end %>
+</ul>
