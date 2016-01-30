@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     root "application#index"
 
     resources :guilds, only: [:new, :create, :destroy]
-    resources :users
+    resources :users do
+      member do
+        patch :archive
+      end
+    end
   end
 
   devise_for :users
