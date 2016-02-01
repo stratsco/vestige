@@ -4,15 +4,39 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+!/log/.keep
+*.*~
+*.bak
+*.sass~
+*.tmproj
+.*.swp
+.DS_Store
+.bundle
+.directory
+.gem
+.rspec
+.ruby-gemset
+.sass-cache/*
+.swo
+.swp
 /.bundle
-
-# Ignore the default SQLite database.
+/.bundle 
+/data
 /db/*.sqlite3
 /db/*.sqlite3-journal
-
-# Ignore all logfiles and tempfiles.
+/fonts
 /log/*
-!/log/.keep
-/tmp
 /spec/examples.txt
+/tags
+/tmp
+\.project
+bower_components/**
+config/database.yml
+dump.rdb
+log/*
+mkmf.log
+node_modules/**
+public/uploads/**
+test/coverage/*
+test/data
+tmp/*

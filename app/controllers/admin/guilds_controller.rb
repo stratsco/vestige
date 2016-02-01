@@ -15,7 +15,7 @@ class Admin::GuildsController < Admin::ApplicationController
       render "new"
     end
   end
-  
+
   def destroy
     @guild = Guild.find(params[:id])
     @guild.destroy

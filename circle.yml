@@ -1,0 +1,10 @@
+machine:
+  services:
+    - postgresql
+  ruby:
+    version: 2.2.4
+
+database:
+  override:
+    - cp config/database.ci.yml config/database.yml
+    - RAILS_ENV=development bundle exec rake db:create:all db:schema:load db:test:prepare

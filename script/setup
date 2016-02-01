@@ -1,0 +1,98 @@
+#!/bin/bash
+# vim:set ft=sh sw=2 sts=2:
+
+DEPS="YES"
+DISTRO=$(uname)
+
+check-dependency() {
+  name=${1}
+
+  case $DISTRO in
+    'Linux')
+      installer="sudo apt-get -y"
+      program=${2-"dpkg -l *$1*"}
+      ;;
+    'Darwin')
+      installer="brew"
+      program=${2-"brew list $1"}
+      ;;
+    *)
+      installer="UNKNOWN"
+      echo "Good luck with that"
+      ;;
+  esac
+
+  if ! eval ${program} &>/dev/null; then
+    echo "This app requires ${name} to run, but it is not installed."
+    echo " ${installer} install ${name}"
+    echo
+    DEPS="NO"
+    return 1
+  fi
+  return 0
+}
+
+install-dependencies() {
+  case ${DISTRO} in
+    'Linux')
+      ${installer} update
+      ${installer} install libpq-dev libcurl4-openssl-dev libxslt1-dev postgresql
+      ;;
+    'Darwin')
+      ${installer} install postgresql
+      ;;
+    *)
+      echo "Good luck with that"
+      ;;
+  esac
+
+  return 0
+}
+
+check-dependencies() {
+  check-dependency postgresql  'which psql'
+  if [ ${DEPS} == "NO" ]; then
+    echo "Dependencies not met. Attempting to install them now…"
+    install-dependencies
+    exit 1
+  else
+    echo "dependencies okay"
+  fi
+}
+
+check-bundle() {
+  if bundle check &>/dev/null ; then
+    echo "bundle okay"
+  else
+    bundle
+  fi
+}
+
+setup-database() {
+  echo "setting up database"
+  CWD=$(pwd)
+  CONFIG_PATH="${CWD}/config"
+  echo "copying example config files"
+  for i in $(ls -x config/*.example.*); do
+    test -f ${i/\.example/} || cp ${i} ${i/\.example/};
+  done
+
+  echo "creating databases"
+  rake db:create:all 2>/dev/null
+  echo "loading database structure"
+  rake db:reset 2>/dev/null
+  echo "migrating database"
+  rake db:migrate 2>/dev/null
+  echo "populating database"
+  rake db:populate 2>/dev/null
+  echo "preparing test database"
+  rake db:test:prepare 2>/dev/null
+}
+
+check-dependencies
+check-bundle
+setup-database
+
+echo
+echo "You're all set!"
+echo
