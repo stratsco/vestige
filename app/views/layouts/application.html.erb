@@ -16,27 +16,25 @@
     <div class="main">
       <nav>
         <div class="navbar">
-          <div class="navbar-left">
-            <ul>
-              <li><%= link_to "Vestige", root_path, :class => 'logo' %></li>
-              <% admins_only do %>
-                <li><%= link_to "Admin", admin_root_path %></li>
-              <% end %>
-              <% unless user_signed_in? %>
-                <li><%= link_to "Sign up", new_user_registration_path %></li>
-                <li><%= link_to "Sign in", new_user_session_path %></li>
-              <% end %>
-            </ul>
-          </div>
-          <% if user_signed_in? %>
-            <div class="navbar-right">
-              <p>Signed in as <%= current_user.email %></p>
+          <ul>
+            <li><%= link_to "Vestige", root_path, class: "logo" %></li>
+            <% admins_only do %>
+              <li><%= link_to "Admin", admin_root_path %></li>
             <% end %>
-            <ul>
-              <li><%= link_to "Sign out", destroy_user_session_path,
-                method: :delete %>
-              </li>
-            </ul>
+            <% unless user_signed_in? %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </ul>
+          <div class="navbar_right"
+            <% if user_signed_in? %>
+              <p>Signed in as <%= current_user.email %></p>
+              <ul>
+                <li><%= link_to "Sign out", destroy_user_session_path,
+                  method: :delete, class: "sign_out" %>
+                </li>
+              </ul>
+            <% end %>
           </div>
         </div>
       </nav>
@@ -44,7 +42,7 @@
         <div><%= message %></div>
       <% end %>
 
-        <%= yield %>
-      </div>
-    </body>
-  </html>
+      <%= yield %>
+    </div>
+  </body>
+</html>

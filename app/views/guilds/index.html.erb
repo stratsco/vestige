@@ -1,16 +1,16 @@
-<h1>Guilds</h1>
+  <h1>Guilds</h1>
 
-<% admins_only do %>
-  <%= link_to "Create Guild", new_admin_guild_path %>
-<% end %>
-
-<div id="guilds">
-  <% @guild.each do |guild| %>
-    <ol>
-      <li>
-        <h3><%= guild.game %></h3>
-        <h2><%= link_to guild.name, guild %></h2>
-      </li>
-    </ol>
+  <% admins_only do %>
+    <%= link_to "Create Guild", new_admin_guild_path %>
   <% end %>
+
+<div class="index">
+    <% @guild.each do |guild| %>
+      <ol>
+        <li>
+          <h3><%= guild.game %></h3>
+          <h2><%= link_to guild.name, guild %></h2>
+        </li>
+      </ol>
+    <% end %>
 </div>
