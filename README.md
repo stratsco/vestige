@@ -1,12 +1,10 @@
 # vestige
 
-##Strats Co Open Source Gaming Guild Management Suite##
+##Strats Co Guild Management Tools Suite##
 
-With there being a group of gamers who are also developers
-within the Strats community, there was interest in doing a group
-project.  We choose to make a suite of guild management tools because 
-it would be easy for a gamer to reason about.
+Strats houses many different gaming guilds at any given time.  This software 
+will allow for the managment of those guilds.  The goal is that this suite is
+built by gamers for gamers.  The members of Strats will offer up ideas for 
+features and give feedback about the overall design.  This is a work in progress.
 
-We are using the feedback from the Strats community to drive our feature
-sets.  We are hoping to not only have a great product in the end, but to
-have a lot of fun in the process.
+
